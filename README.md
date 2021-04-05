@@ -5,7 +5,7 @@ This list include a collections of Combos, word lists shells, exploit and code f
 
 ### Install
 
-**Zip**
+**AS Zip**
 ```
 wget -c https://github.com/undercodeutilities/Accesslist/archive/master.zip -O Accesslist.zip \
   && unzip Access.zip \
