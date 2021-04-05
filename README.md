@@ -24,7 +24,7 @@ git clone https://github.com/undercodeutilities/Accesslist.git
 
 This project is licensed under the [MIT license](LICENSE).
 
-![MIT License](https://imgur.com/UGdTfeo.png)
+![MIT License](https://imgur.com/x4vQC6O.png)
  
 - - - 
 
