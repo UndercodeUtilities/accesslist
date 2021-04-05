@@ -12,12 +12,8 @@ wget -c https://github.com/undercodeutilities/Accesslist/archive/master.zip -O A
   && rm -f Access.zip
 ```
 
-**Git (Small)**
-```
-git clone --depth 1 https://github.com/undercodeutilities/Accesslist.git
-```
 
-**Git (Complete)**
+**Git**
 ```
 git clone https://github.com/undercodeutilities/Accesslist.git
 ```
