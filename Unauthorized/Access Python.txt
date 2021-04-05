@@ -1,0 +1,92 @@
+Access Via SAML Vulnerabilities
+
+
+The user authenticates to an Identity Provider (IdP) such as Duo or GSuite which generates a signed SAML Response. The user’s browser then forwards this response along to an SP such as Slack or Github.
+
+The SP validates the SAML Responses signature.
+
+If the signature is valid, a string identifier within the SAML Response (e.g. the NameID) will identify which user to authenticate.
+
+A really simplified SAML Response could look something like:
+
+<SAMLResponse>
+    <Issuer>https://idp.com/</Issuer>
+    <Assertion ID="_id1234">
+        <Subject>
+            <NameID>user@user.com</NameID>
+        </Subject>
+    </Assertion>
+    <Signature>
+        <SignedInfo>
+            <CanonicalizationMethod Algorithm="xml-c14n11"/>
+            <Reference URI="#_id1234"/>
+        </SignedInfo>
+        <SignatureValue>
+            some base64 data that represents the signature of the assertion
+        </SignatureValue>
+    </Signature>
+</SAMLResponse>
+This example omits a lot of information, but that omitted information is not too important for this vulnerability. The two essential elements from the above XML blob are the Assertion and the Signature element. The Assertion element is ultimately saying "Hey, I, the Identity Provider, authenticated the user user@user.com." A signature is generated for that Assertion element and stored as part of the Signature element.
+
+The Signature element, if done correctly, should prevent modification of the NameID. Since the SP likely uses the NameID to determine what user should be authenticated, the signature prevents an attacker from changing their own assertion with the NameID "attacker@user.com" to "user@user.com." If an attacker can modify the NameID without invalidating the signature, that would be bad (hint, hint)!
+
+XML Canononononicalizizization: Easier Spelt Than Done
+The next relevant aspect of XML signatures is XML canonicalization. XML canonicalization allows two logically equivalent XML documents to have the same byte representation. For example:
+
+<A X="1" Y="2">some text<!-- and a comment --></A>
+and
+
+< A Y="2" X="1" >some text</ A >
+These two documents have different byte representations, but convey the same information (i.e. they are logically equivalent).
+
+Canonicalization is applied to XML elements prior to signing. This prevents practically meaningless differences in the XML document from leading to different digital signatures. This is an important point so I'll emphasize it here: multiple different-but-similar XML documents can have the same exact signature. This is fine, for the most part, as what differences matter are specified by the canonicalization algorithm.
+
+As you might have noticed in the toy SAML Response above, the CanonicalizationMethod specifies which canonicalization method to apply prior to signing the document. There are a couple of algorithms outlined in the XML Signature specification, but the most common algorithm in practice seems to be http://www.w3.org/2001/10/xml-exc-c14n# (which I'll just shorten to exc-c14n).
+
+There is a variant of exc-c14n that has the identifier http://www.w3.org/2001/10/xml-exc-c14n#WithComments. This variation of exc-c14n does not omit comments, so the two XML documents above would not have the same canonical representation. This distinction between the two algorithms will be important later.
+
+XML APIs: One Tree; Many Ways
+One of the causes of this vulnerability is a subtle and arguably unexpected behavior of XML libraries like Python’s lxml or Ruby’s REXML. Consider the following XML element, NameID:
+
+<NameID>kludwig</NameID>
+And if you wanted to extract the user identifier from that element, in Python, you may do the following:
+
+from defusedxml.lxml import fromstring
+payload = "<NameID>kludwig</NameID>"
+data = fromstring(payload)
+return data.text # should return 'kludwig'
+Makes sense, right? The .text method extracts the text of the NameID element.
+
+Now, what happens if I switch things up a bit, and add a comment to this element:
+
+from defusedxml.lxml import fromstring
+doc = "<NameID>klud<!-- a comment? -->wig</NameID>"
+data = fromstring(payload)
+return data.text # should return ‘kludwig’?
+If you would expect the exact same result regardless of the comment addition, I think you are in the same boat as me and many others. However, the .text API in lxml returns klud! Why is that?
+
+Well, I think what lxml is doing here is technically correct, albeit a bit unintuitive. If you think of the XML document as a tree, the XML document looks like:
+
+element: NameID
+|_ text: klud
+|_ comment: a comment?
+|_ text: wig
+and lxml is just not reading text after the first text node ends. Compare that with the uncommented node which would be represented by:
+
+element: NameID
+|_ text: kludwig
+Stopping at the first text node in this case makes perfect sense!
+
+Another XML parsing library that exhibits similar behavior is Ruby's REXML. The documentation for their get_text method hints at why these XML APIs exhibit this behavior:
+
+[get_text] returns the first child Text node, if any, or nil otherwise. This method returns the actual Text node, rather than the String content.
+Stopping text extraction after the first child, while unintuitive, might be fine if all XML APIs behaved this way. Unfortunately, this is not the case, and some XML libraries have nearly identical APIs but handle text extraction differently:
+
+import xml.etree.ElementTree as et
+doc = "<NameID>klud<!-- a comment? -->wig</NameID>"
+data = et.fromstring(payload)
+return data.text # returns 'kludwig'
+
+
+Reference:
+https://duo.com/blog/duo-finds-saml-vulnerabilities-affecting-multiple-implementations
