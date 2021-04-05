@@ -45,7 +45,7 @@ This project is licensed under the [MIT license](LICENSE).
 
 ## More
 
-[Official](https://Undercode.help)
+[Official Website](https://Undercode.help)
 
 [For Developers](https://dev.undercode.help)
 
