@@ -33,7 +33,7 @@ This project is licensed under the [MIT license](LICENSE).
     <img src="https://img.shields.io/github/followers/undercodeutilities?logo=github&style=for-the-badge" alt="GitHub badge" />
   </a>
   <a href="http://twitter.com/undercodeupdate_">
-    <img src="https://img.shields.io/twitter/follow/undercodeupdate?label=FOLLOW&logo=twitter&style=for-the-badge" />
+    <img src="https://img.shields.io/twitter/follow/undercodeupdate?color=blue&label=FOLLOW&logo=twitter&style=for-the-badge" />
   </a>
   <a href="https://www.youtube.com/undercode?sub_confirmation=1">
     <img src="https://img.shields.io/youtube/channel/subscribers/UCTxFOnRuDDAD6NIHis06QVA?label=Subscribe&logo=youtube&logoColor=red&style=for-the-badge" />
