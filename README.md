@@ -40,3 +40,13 @@ This project is licensed under the [MIT license](LICENSE).
   </a>
 </p>
 <h4 align="center"><img src="https://github-readme-stats.vercel.app/api?username=undercodeutilities&show_icons=true&theme=tokyonight" /></h4>
+
+- - - 
+
+## More
+
+[Developers](https://dev.undercode.help)
+
+[CVE](https://dailycve.com)
+
+[News](https://UndercodeNews.com)
