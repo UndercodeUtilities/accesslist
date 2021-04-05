@@ -8,7 +8,7 @@ This list include a collections of Combos, word lists shells, exploits and Vulne
 
 **As Zip**
 ```
-wget -c https://github.com/undercodeutilities/Accesslist/archive/master.zip -O Accesslist.zip \
+wget -c https://github.com/undercodeutilities/Accesslist/archive/main.zip -O Accesslist.zip \
   && unzip Access.zip \
   && rm -f Access.zip
 ```
