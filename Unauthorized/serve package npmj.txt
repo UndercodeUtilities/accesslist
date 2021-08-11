@@ -1,0 +1,42 @@
+Handling of URL Encoding permitting access to ignored:
+
+Create a file serving listing application that runs serve, and configure a few directories and files to ignore in the ignore settings.
+
+const serve = require('serve')
+const server = serve(__dirname, {
+	  port: 1337,
+	  ignore: ['testfolder', 'test.txt']
+})
+Run:
+$ node filename.js
+
+With the exception of the folder testfolder and the file test.txt, the current directory will now be served by serve.
+We receive a Not Found message when we try to curl test.txt.
+
+
+
+$ curl http://localhost:1337/t%65st.txt
+this is a forbidden file :D
+
+$ curl http://localhost:1337/t%65st.txt
+this is a forbidden file :D
+(Access)
+
+For all dir:
+
+$ curl http://localhost:1337/t%65stfolder/
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Files within testserve/testfolder/</title>
+      .
+      .
+          <li>
+            <a href="/testfolder/testfile.txt" title="testfile.txt" class="txt">testfile.txt</a>
+            <i>31 B</i>
+          </li>
+      .
+      .
+
