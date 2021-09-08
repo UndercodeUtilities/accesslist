@@ -1,0 +1,21 @@
+Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') in ZMarkdown
+
+
+A Remote Command Execution vulnerability was found in the rebber module,
+which allowed execution of arbitrary commands. The reported problem came
+from CodeBlocks, which could be escaped to insert malicious LaTeX.
+
+Anyone using rebber without sanitation of code content or a custom
+macro is impacted by this vulnerability. Here is an example of a Markdown
+content that will exploit the vulnerability:
+
+```
+\end{CodeBlock}
+
+\immediate\write18{COMMAND > outputrce}
+\input{outputrce}
+
+\begin{CodeBlock}{text}
+```
+Will insert into the generated LaTeX the result of executing
+COMMAND on the system.

@@ -1,0 +1,15 @@
+Privilege escalation in Hashicorp Nomad
+CVE-2021-37218
+
+A vulnerability was identified in Nomad and Nomad Enterprise (“Nomad”) such that client agents can escalate privileges by 
+directly communicating with the server agent’s Raft RPC layer. This vulnerability, CVE-2021-37218, was fixed in Nomad 1.0.10 and 1.1.4.
+
+Background
+Nomad uses mTLS for agent communication between Nomad client and server agents. This provides an encrypted and authenticated RPC channel. A subset of the available server RPC functionality is meant to be exposed to client agents, with the others intended for server agent usage only.
+
+Details
+During internal testing, it was observed that using a non-server certificate from the configured Nomad CA enables access to server-only Raft RPC functionality.
+
+Nomad’s RPC authentication logic has been modified to correctly enforce server-only access for the Raft RPC layer.
+
+
