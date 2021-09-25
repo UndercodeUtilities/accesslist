@@ -1,0 +1,7 @@
+Member account takeover before 4.15.1 
+
+An error in the implementation of the member email change functionality allows unauthenticated users to change the email address of arbitrary member accounts to one they control by crafting a request to the relevant API endpoint, and validating the new address via magic link sent to the new email address.
+
+Ghost(Pro) has already been patched. Self-hosters are impacted if running Ghost a version between 3.18.0 and 4.15.0 with members functionality enabled.
+
+
