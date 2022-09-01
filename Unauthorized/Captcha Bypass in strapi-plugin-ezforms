@@ -1,0 +1,5 @@
+Invalid Google Recaptcha still send email:
+ Email notifications are still sent even though the score is -1.
+
+Vulnerable Versions: 
+<0.0.10
