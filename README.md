@@ -1,8 +1,8 @@
 
 ## Access list is a collection of multiple types of lists used during pentesting, collected in one place, created by [Undercode](https://undercode.help)
 ![Access List](https://imgur.com/WThk2ew.png)
-This list include a collections of Combos, wordlists shells, exploits and Vulnerabilities and may more…
-- - - 
+## This list include a collections of Combos, wordlists shells, exploits and Vulnerabilities and may more…
+- - -
 
 ### Install
 
@@ -25,14 +25,14 @@ git clone https://github.com/undercodeutilities/Accesslist.git
 This project is licensed under the [MIT license](LICENSE).
 
 ![MIT License](https://imgur.com/x4vQC6O.png)
- 
-- - - 
+
+- - -
 
 <p align="center">
   <a href="https://github.com/undercodeutilities?tab=followers">
     <img src="https://img.shields.io/github/followers/undercodeutilities?logo=github&style=for-the-badge" alt="GitHub badge" />
   </a>
-  <a href="http://twitter.com/undercodeupdate">
+  <a href="http://twitter.com/undercodenews">
     <img src="https://img.shields.io/twitter/follow/undercodeupdate?color=blue&label=FOLLOW&logo=twitter&style=for-the-badge" />
   </a>
   <a href="https://www.youtube.com/undercode?sub_confirmation=1">
@@ -41,7 +41,7 @@ This project is licensed under the [MIT license](LICENSE).
 </p>
 <h4 align="center"><img src="https://github-readme-stats.vercel.app/api?username=undercodeutilities&show_icons=true&theme=algolia" /></h4>
 
-- - - 
+- - -
 
 ## More
 
