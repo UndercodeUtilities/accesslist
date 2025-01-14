@@ -1,7 +1,7 @@
 ## Access list is a collection of multiple types of lists used during pentesting, collected in one place, created by [Undercode](https://undercode.help)
 ![Access List](https://imgur.com/WThk2ew.png)
 
-## This list include a collections of Combos, wordlists shells, exploits and Vulnerabilities and may more…
+## This list include a collections of Tools, Combos, wordlists shells, exploits and Vulnerabilities and may more…
 
 - - -
 
@@ -19,6 +19,7 @@ wget -c https://github.com/undercodeutilities/Accesslist/archive/main.zip -O Acc
 ```
 git clone https://github.com/undercodeutilities/Accesslist.git
 ```
+
 - - -
 
 ### Licensing
@@ -43,6 +44,23 @@ This project is licensed under the [MIT license](LICENSE).
 <h4 align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=undercodeutilities&show_icons=true&theme=algolia&count_private=true" alt="GitHub stats" />
 </h4>
+
+- - -
+
+### Donations
+
+If you find this project useful, consider [buying me a coffee](https://buymeacoffee.com/undercode) to show your support and help us share more valuable content. ☕💖
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-yellow?logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/undercode)
+
+- - -
+
+## Join Us
+
+Join Our Cyber Groups:
+
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/He7HQoHxaIv2S1h7KoEXdw)
+[![Telegram](https://img.shields.io/badge/Telegram-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/undercodeCommunity)
 
 - - -
 
