@@ -1,0 +1,28 @@
+🦑 Default login credentials and IP addresses for routers.
+
+| **Default Usernames**              | **Default Passwords**                      | **Common IP Addresses for Routers**   |
+|------------------------------------|--------------------------------------------|---------------------------------------|
+| admin                              | admin                                      | 192.168.0.1                          |
+| root                               | password                                   | 192.168.1.1                          |
+| user                               | 1234                                       | 192.168.0.254                        |
+| administrator                      | 12345                                      | 192.168.2.1                          |
+| support                            | 123456                                     | 192.168.1.254                        |
+| guest                               | 12345678                                   | 192.168.100.1                        |
+| superuser                          | 0000                                       | 10.0.0.1                             |
+| default                            | toor (used for some Unix-like devices)     | 10.0.1.1                             |
+| ubnt (Ubiquiti devices)            | blank (no password set)                    | 192.168.10.1                         |
+| cisco                              | user                                       | 192.168.137.1                        |
+| manager                            | root                                       | 192.168.8.1                          |
+| operator                           | qwerty                                     | 192.168.11.1                         |
+| tech                               | letmein                                    |                                       |
+| sysadmin                           | welcome                                    |                                       |
+| guestadmin                         | 123qwe                                     |                                       |
+| install                            | ubnt (Ubiquiti devices)                    |                                       |
+| service                            | changeme                                   |                                       |
+| repeater                           | default                                    |                                       |
+|                                    | system                                     |                                       |
+|                                    | 1111                                       |                                       |
+|                                    | 000000                                     |                                       |
+|                                    | access                                     |                                       |
+|                                    | superuser                                  |                                       |
+|                                    | service                                    |                                       |
