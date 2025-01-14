@@ -1,0 +1,28 @@
+🦑User Automation Process Using CSV:
+
+1- Create the CSV Script
+
+Begin by creating a CSV file with the following headers:
+{DN,ObjectClass,SamAccountName,UserPrincipalName,Description,UserAccountName,DisplayName}
+
+2- Fill in the Data
+Below the headers, enter the required user details. Each line should represent a user in this format:
+{"CN=User1,OU=IT,DC=company,DC=com",user,User1,user1@company.com,"IT Specialist","User1",514,"User One"
+"CN=User2,OU=Sales,DC=company,DC=com",user,User2,user2@company.com,"Sales Representative","User2",514,"User Two"}
+
+3- Save the File
+Once all user data is filled in, save the file with a .csv extension
+Example filename: users.csv
+
+4- Import the Users
+To import the users, open PowerShell and run the following command
+{csvde -i -f "C:\path\to\your\users.csv"}
+
+5-  Enable the Accounts
+After importing, all accounts will be disabled by default. To enable them:
+Reset their passwords.
+
+Use PowerShell commands to enable the accounts.
+
+▁ ▂ ▄ U𝕟𝔻Ⓔ𝐫Ć𝔬𝓓ⓔ ▄ ▂ ▁
+
