@@ -40,7 +40,9 @@ This project is licensed under the [MIT license](LICENSE).
     <img src="https://img.shields.io/youtube/channel/subscribers/UCTxFOnRuDDAD6NIHis06QVA?label=Subscribe&logo=youtube&logoColor=red&style=for-the-badge" />
   </a>
 </p>
-<h4 align="center"><img src="https://github-readme-stats.vercel.app/api?username=undercodeutilities&show_icons=true&theme=algolia" /></h4>
+<h4 align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=undercodeutilities&show_icons=true&theme=algolia&count_private=true" alt="GitHub stats" />
+</h4>
 
 - - -
 
