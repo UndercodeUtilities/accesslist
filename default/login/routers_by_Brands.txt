@@ -1,0 +1,54 @@
+Default login credentials and IP addresses for common router brands.
+
+1. TP-Link
+IP Address: 192.168.0.1 or 192.168.1.1
+Username: admin
+Password: admin
+2. Netgear
+IP Address: 192.168.0.1 or 192.168.1.1
+Username: admin
+Password: password
+3. D-Link
+IP Address: 192.168.0.1 or 192.168.1.1
+Username: admin
+Password: admin or leave it blank
+4. Linksys
+IP Address: 192.168.1.1
+Username: admin
+Password: admin or password
+5. Asus
+IP Address: 192.168.1.1
+Username: admin
+Password: admin
+6. Huawei
+IP Address: 192.168.1.1
+Username: admin
+Password: admin or Huawei
+7. Zyxel
+IP Address: 192.168.1.1
+Username: admin
+Password: 1234
+8. Cisco
+IP Address: 192.168.1.1
+Username: admin
+Password: admin
+9. TP-Link (Older models)
+IP Address: 192.168.1.1
+Username: admin
+Password: admin or password
+10. Belkin
+IP Address: 192.168.2.1
+Username: admin
+Password: admin
+11. Motorola
+IP Address: 192.168.100.1
+Username: admin
+Password: motorola
+12. Apple AirPort
+IP Address: 10.0.1.1
+Username: admin
+Password: public
+13. TrendNet
+IP Address: 192.168.10.1
+Username: admin
+Password: admin
