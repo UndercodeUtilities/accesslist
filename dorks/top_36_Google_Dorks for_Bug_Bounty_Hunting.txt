@@ -1,0 +1,95 @@
+Google Dorks for Bug Bounty Hunting:
+
+1. Exposed Directories and Files: 7 dorks
+intitle:index.of "config"
+intitle:index.of "admin"
+intitle:index.of "backup"
+intitle:index.of "logs"
+intitle:index.of "secrets"
+intitle:index.of "database"
+intitle:index.of "private"
+
+2. Vulnerable Servers and Software Versions: 7 dorks
+inurl:/phpmyadmin/
+inurl:/admin/
+inurl:/wp-admin/
+inurl:/wp-login.php
+intitle:"index of" "wp-config.php"
+intitle:"index of" "config.php"
+intitle:"index of" "robots.txt"
+
+3. Exposed Login Pages: 4 dorks
+inurl:"login" intitle:"login"
+inurl:"login" "user" "pass"
+inurl:"sign-in" "email" "password"
+inurl:"admin" "password"
+
+4. Files Containing Sensitive Data: 7 dorks
+filetype:env
+filetype:sql "password"
+filetype:log "error"
+filetype:bak
+filetype:log inurl:admin
+inurl:".env"
+inurl:".git/config"
+
+5. Publicly Exposed Backups: 3 dorks
+intitle:"index of" "backup"
+intitle:"index of" "dump.sql"
+intitle:"index of" "database"
+
+6. Potential SQL Injection Points: 6 dorks
+inurl:"id=" inurl:"product"
+inurl:"article=" inurl:"id="
+inurl:"search?q="
+inurl:"cat=" inurl:"page"
+inurl:"?page=" inurl:"category"
+
+7. Exposed Credentials and API Keys: 4 dorks
+inurl:"api_key"
+inurl:"client_secret"
+filetype:env "API_KEY"
+filetype:config "API_SECRET"
+
+8. Open Directories: 5 dorks
+intitle:index.of "html"
+intitle:index.of "uploads"
+intitle:index.of "img"
+intitle:index.of "images"
+intitle:index.of "files"
+
+9. Publicly Available Source Code: 4 dorks
+inurl:"source" filetype:js
+inurl:"src" filetype:css
+intitle:"index of" "src"
+inurl:"github.com" inurl:"repo"
+
+10. Exposed Security-Related Files: 4 dorks
+inurl:".git/"
+inurl:".git/config"
+intitle:"index of" ".git"
+intitle:"index of" ".svn"
+
+11. Open MongoDB Instances: 2 dorks
+intitle:"MongoDB" inurl:"serverStatus"
+intitle:"MongoDB" inurl:"db.collection"
+
+12. Cross-Site Scripting (XSS) Vulnerabilities: 3 dorks
+inurl:"search" intext:"<script"
+inurl:"query=" intext:"<script"
+inurl:"input" intext:"<script"
+
+13. Exposed Elasticsearch Endpoints: 3 dorks
+inurl:"/_cat/indices"
+inurl:"/_search"
+inurl:"/_node"
+
+14. Exposed Redis Instances: 1 dork
+inurl:"redis" inurl:"dump.rdb"
+
+15. Exposed Jenkins Instances: 1 dork
+inurl:"/jenkins" inurl:"login"
+
+16. Exposed Firebase Realtime Database: 2 dorks
+inurl:"firebaseio.com"
+inurl:"/data.json"
