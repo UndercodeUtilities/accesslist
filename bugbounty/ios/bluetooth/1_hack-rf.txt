@@ -1,0 +1,4 @@
+ 
+HACK-RF BLUETOOTH SPAM?
+
+Most people don’t know that before Flipper zero came, Hackrf was and is still doing Bluetooth spamming and crushing iOS devices. I’m doing this POC on my iPhone 13 with 18.2.1 update and as you can see is working even with Bluetooth is off. The HackRF is bigger than the Flipper Zero in the context of Bluetooth spoofing because it provides greater flexibility, power, and signal control for professional-grade research and exploitation. You can do on both iOS, windows and Android 🤝
