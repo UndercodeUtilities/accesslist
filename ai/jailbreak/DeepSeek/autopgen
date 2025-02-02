@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Function to check and install xclip if not installed
+install_xclip() {
+    if ! command -v xclip &> /dev/null; then
+        echo -e "\e[33mChecking requirements: xclip not found. Installing xclip...\e[0m"
+        sudo apt update && apt install xclip -y
+    else
+        echo -e "\e[33mChecking requirements: xclip is already installed.\e[0m"
+    fi
+}
+
+# Function to copy content from a file
+copy_content() {
+    local file="$1"
+    if [[ -f "$file" ]]; then
+        cat "$file" | xclip -selection clipboard
+        echo "Content of $file copied to clipboard."
+    else
+        echo "File $file not found!"
+    fi
+}
+
+# Check and install xclip
+install_xclip
+
+# Get list of .txt files in the current directory
+txt_files=(*.txt)
+
+# Check if there are any .txt files in the directory
+if [ ${#txt_files[@]} -eq 0 ]; then
+    echo "No .txt files found in the directory!"
+    exit 1
+fi
+
+# Display menu
+echo "Choose a file to copy content from:"
+for i in "${!txt_files[@]}"; do
+    echo "$((i+1))) ${txt_files[$i]}"
+done
+
+# Get user choice
+read -p "Enter your choice: " choice
+
+# Validate the input and copy the selected file's content
+if [[ $choice -ge 1 && $choice -le ${#txt_files[@]} ]]; then
+    selected_file="${txt_files[$((choice-1))]}"
+    copy_content "$selected_file"
+else
+    echo "Invalid choice. Exiting."
+fi
