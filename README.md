@@ -66,7 +66,7 @@ Join Our Cyber Groups:
 - - -
 
 
-### AI
+### Video Proof AI—Educational Purposes
 
 [AI Prompt](https://youtube.com/shorts/wVxWqGRVHAg?feature=share)
 
