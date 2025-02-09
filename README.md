@@ -1,5 +1,5 @@
 ## Access list is a collection of multiple types of lists used during pentesting, collected in one place, created by [Undercode](https://undercode.help)
-![Access List](https://imgur.com/WThk2ew.png)
+[![Access List](https://imgur.com/WThk2ew.png)](https://undercode.help/community)
 
 ## This list include a collections of Tools, Combos, wordlists shells, exploits and Vulnerabilities and may more…
 
@@ -68,7 +68,7 @@ Join Our Cyber Groups:
 
 ### Video Proof AI—Educational Purposes
 
-[AI Prompt](https://youtube.com/shorts/wVxWqGRVHAg?feature=share)
+[AI Prompt - Permanent](https://youtube.com/shorts/wVxWqGRVHAg?feature=share)
 
 
 - - -
