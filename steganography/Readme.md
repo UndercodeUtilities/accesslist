@@ -1,4 +1,3 @@
-```markdown
 # Advanced Steganography Suite 🔐
 
 **Hide and extract secret data within images with military-grade security**
