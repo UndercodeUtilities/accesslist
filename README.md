@@ -42,9 +42,55 @@ This project is licensed under the [MIT license](LICENSE).
     <img src="https://img.shields.io/youtube/channel/subscribers/UCTxFOnRuDDAD6NIHis06QVA?label=Subscribe&logo=youtube&logoColor=red&style=for-the-badge" />
   </a>
 </p>
-<h4 align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=undercodeutilities&show_icons=true&theme=algolia&count_private=true" alt="GitHub stats" />
-</h4>
+
+```mermaid
+graph TD
+    ROOT["Security Research Repo"] --> AI
+    AI --> AI_JAILBREAK["ai_jailbreak"]
+    AI_JAILBREAK --> AI_CHATGPT["chatgpt"]
+    AI_JAILBREAK --> AI_DEEPSEEK["DeepSeek"]
+
+    ROOT --> BUGBOUNTY["bugbounty"]
+    BUGBOUNTY --> BB_AUTO["Automation Process Using CSV"]
+    BUGBOUNTY --> BB_IDOR["IDOR"]
+    BUGBOUNTY --> BB_IOS["ios"]
+    BB_IOS --> BB_IOS_BT["bluetooth"]
+    BUGBOUNTY --> BB_POC["POC"]
+
+    ROOT --> COMBOS["Combos"]
+    ROOT --> DEFAULT["default"]
+    DEFAULT --> DEFAULT_LOGIN["login"]
+
+    ROOT --> DORKS["dorks"]
+    ROOT --> FLAW["Flaw"]
+    FLAW --> FLAW_UNION["UnionPay android security payment vulnerabilities"]
+    FLAW --> FLAW_WIN["Windows"]
+
+    ROOT --> FORENSIC["forensic"]
+    FORENSIC --> FORENSIC_IMG["image"]
+
+    ROOT --> FUZZING["Fuzzing"]
+    ROOT --> PASSWORDS["Passwords"]
+
+    ROOT --> SHELLS["Shells"]
+    SHELLS --> SHELLS_LINUX["Linux"]
+    SHELLS_LINUX --> SHELLS_LINUX_CVE["CVE_2025_22035"]
+    SHELLS --> SHELLS_MAC["Macos"]
+    SHELLS --> SHELLS_WIN["Windows"]
+
+    ROOT --> STEG["steganography"]
+    ROOT --> UNAUTH["Unauthorized"]
+
+    ROOT --> VULNS["Vulnerabilities"]
+    VULNS --> VULNS_CVE1["CVE_2024_7414_video"]
+    VULNS --> VULNS_CVE2["CVE_2025_0411_7_zip"]
+    VULNS --> VULNS_CVE3["CVE_2025_22035"]
+    VULNS --> VULNS_MAG["Magneto"]
+    VULNS --> VULNS_WP["Wordpress"]
+
+    ROOT --> WORDLISTS["wordlists_tb"]
+    WORDLISTS --> WORDLISTS_WEB["forweb"]
+```
 
 - - -
 
@@ -63,17 +109,13 @@ Join Our Cyber Groups:
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://undercode.help/whatsapp)
 [![Telegram](https://img.shields.io/badge/Telegram-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/undercodeCommunity)
 
-
 - - -
-
 
 ### Video Proof AI—Educational Purposes
 
 [AI Prompt - Permanent](https://youtube.com/shorts/wVxWqGRVHAg?feature=share)
 
-
 - - -
-
 
 ## More
 
