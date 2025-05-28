@@ -47,6 +47,7 @@ This project is licensed under the [MIT license](LICENSE).
 graph TD
     ROOT["Security Research Repo"] --> AI
     AI --> AI_JAILBREAK["ai_jailbreak"]
+    AI --> simulation["simulation"]
     AI_JAILBREAK --> AI_CHATGPT["chatgpt"]
     AI_JAILBREAK --> AI_DEEPSEEK["DeepSeek"]
 
