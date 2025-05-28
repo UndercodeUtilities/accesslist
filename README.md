@@ -45,7 +45,7 @@ This project is licensed under the [MIT license](LICENSE).
 
 ```mermaid
 graph TD
-    ROOT["Security Research Repo"] --> AI
+    ROOT["ACCESSLIST"] --> AI
     AI --> AI_JAILBREAK["ai_jailbreak"]
     AI --> simulation["simulation"]
     AI_JAILBREAK --> AI_CHATGPT["chatgpt"]
