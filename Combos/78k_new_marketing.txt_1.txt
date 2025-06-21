@@ -1,4 +1,4 @@
-#Valid combos generated for marketing purposes
+#Valid emails generated for marketing/pentesting purposes
 
 lucaappia@gmail.com
 man2008preet@gmail.com

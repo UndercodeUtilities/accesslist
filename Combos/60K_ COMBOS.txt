@@ -1,4 +1,4 @@
-#Valid combos generated for marketing purposes
+#Valid emails generated for marketing/pentesting purposes
 
 
 sveltino10@hotmail.it:123456
