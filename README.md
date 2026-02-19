@@ -112,7 +112,7 @@ Join Our Cyber Groups:
 
 - - -
 
-### Video Proof AI—Educational Purposes
+### Videos
 
 [AI Prompt - Permanent](https://youtube.com/shorts/wVxWqGRVHAg?feature=share)
 
